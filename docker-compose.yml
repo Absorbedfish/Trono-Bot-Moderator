@@ -1,0 +1,46 @@
+services:
+  # 1. El Servidor Local de la API de Telegram
+  telegram-bot-api:
+    image: aiogram/telegram-bot-api:latest
+    container_name: telegram_bot_api_local
+    restart: always
+    environment:
+      # Credenciales leídas de forma segura desde el archivo .env
+      - TELEGRAM_API_ID=${TELEGRAM_API_ID}
+      - TELEGRAM_API_HASH=${TELEGRAM_API_HASH}
+      - TELEGRAM_LOCAL=1
+    volumes:
+      # Lee dinámicamente la ruta física del host desde tu archivo .env
+      - ${TELEGRAM_DATA_DIR}:/var/lib/telegram-bot-api
+    ports:
+      - "8082:8081"
+
+  # 2. Servicio de Inteligencia Artificial (OpenNSFW)
+  ia-opennsfw-trono:
+    build: ./IA
+    container_name: ia_opennsfw_trono
+    restart: always
+    environment:
+      - TZ=Europe/Moscow
+      - TF_CPP_MIN_LOG_LEVEL=2
+      - DEBIAN_FRONTEND=noninteractive
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ${TELEGRAM_DATA_DIR}:/app/shared_media
+
+  # 3. Servicio del Bot de Telegram (Trono)
+  telegram-bot-trono:
+    build: ./Bot
+    container_name: trono_bot_container
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - TZ=Europe/Moscow
+      - DEBIAN_FRONTEND=noninteractive
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - ia-opennsfw-trono
+      - telegram-bot-api
+    volumes:
+      - ${TELEGRAM_DATA_DIR}:/app/shared_media

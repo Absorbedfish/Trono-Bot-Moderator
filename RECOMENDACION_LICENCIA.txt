@@ -1,0 +1,118 @@
+================================================================================
+  ANÁLISIS Y RECOMENDACIÓN DE LICENCIA DE SOFTWARE PARA TRONO BOT v2.1.0
+================================================================================
+Fecha de análisis: Octubre 2026
+Proyecto: Trono Bot (Bot de Moderación NSFW para Telegram con IA)
+Desarrollador / Creador: Manuel (@TronoModeradorBot)
+================================================================================
+
+Estimado desarrollador,
+
+A continuación presento el análisis técnico-legal de las licencias de software 
+de código abierto más adecuadas para tu proyecto, junto con una recomendación 
+concreta basada en la naturaleza de Trono Bot.
+
+--------------------------------------------------------------------------------
+1. NATURALEZA Y PARTICULARIDADES DE TRONO BOT
+--------------------------------------------------------------------------------
+Trono Bot no es una biblioteca común ni un programa que los usuarios finales 
+instalan en sus computadoras de escritorio. Es un **servicio en red (SaaS/Bot)** 
+compuesto por:
+- Un microservicio web de Inteligencia Artificial (Flask + TensorFlow).
+- Un servidor local de Telegram Bot API.
+- Un bot de moderación que interactúa con miles de personas en la nube.
+
+Esta distinción es fundamental al momento de elegir una licencia de software.
+
+--------------------------------------------------------------------------------
+2. COMPARATIVA DE OPCIONES DISPONIBLES
+--------------------------------------------------------------------------------
+
+A) GNU AFFERO GENERAL PUBLIC LICENSE v3.0 (GNU AGPLv3) — [⭐ RECOMENDACIÓN #1]
+   - Tipo: Copyleft Fuerte orientado a Servicios de Red / Nube.
+   - ¿Cómo funciona?:
+     Garantiza que cualquier persona que use, modifique o distribuya tu código 
+     deba mantenerlo de código abierto bajo la misma licencia.
+   - LA VENTAJA CLAVE PARA TRONO BOT (Cierre del vacío de la nube):
+     Bajo licencias como GPLv3 tradicional o MIT, una empresa o un desarrollador 
+     tercero podría tomar todo tu bot, agregarle nuevas funciones, montarlo en 
+     un servidor privado y ofrecerlo como un servicio de pago en Telegram sin 
+     compartir una sola línea de código, porque "no están distribuyendo el software 
+     físicamente, solo ejecutándolo en un servidor".
+     La AGPLv3 cierra esa brecha: establece que si alguien ejecuta el bot como 
+     un servicio de red al que los usuarios acceden (como un bot de Telegram), 
+     ESTÁ OBLIGADO LEGALMENTE a poner a disposición del público el código fuente 
+     completo de todas las modificaciones realizadas.
+   - Ideal si buscas: Que nadie robe tu trabajo para privatizarlo o crear un clon 
+     comercial cerrado de @TronoModeradorBot sin retribuir a la comunidad.
+
+B) GNU GENERAL PUBLIC LICENSE v3.0 (GNU GPLv3)
+   - Tipo: Copyleft Fuerte estándar.
+   - ¿Cómo funciona?: Exige que quien distribuya copias o derivados del software 
+     entregue el código fuente.
+   - Limitación: No cubre la interacción a través de red (lo que permite a terceros 
+     ejecutar el bot privadamente sin liberar sus mejoras).
+
+C) MIT LICENSE
+   - Tipo: Permisiva al 100%.
+   - ¿Cómo funciona?: Permite que cualquier persona haga lo que quiera con el 
+     código (usarlo, venderlo, modificarlo, cerrarlo, integrarlo en software 
+     privativo comercial), con la única condición de mantener el aviso de 
+     derechos de autor original.
+   - Ideal si buscas: Máxima difusión y adopción sin importar si terceros cierran 
+     o comercializan el software sin compartir mejoras.
+
+D) APACHE LICENSE 2.0
+   - Tipo: Permisiva con protección de patentes.
+   - Similar a MIT pero con cláusulas formales de patentes y marcas registradas.
+
+--------------------------------------------------------------------------------
+3. DICTAMEN Y CONCLUSIÓN: ¿CUÁL TE RECOMIENDO Y POR QUÉ?
+--------------------------------------------------------------------------------
+
+🎯 MI RECOMENDACIÓN PRINCIPAL: GNU AGPLv3 (GNU Affero General Public License v3)
+
+¿Por qué es la mejor para ti?
+1. Protege tu esfuerzo e innovación: Has invertido tiempo en resolver problemas 
+   complejos (como la mitigación de ataques por álbumes, cortocircuito en CPU con 
+   OpenCV, balanceo de memoria RAM vs. Disco y protocolo Failsafe). Sería injusto 
+   que alguien tome tu arquitectura y monte un negocio privado sin compartir sus 
+   cambios.
+2. Fomenta la colaboración abierta: Quien quiera mejorar el modelo o agregar 
+   nuevas capacidades de moderación tendrá que compartir sus avances con todos, 
+   beneficiando a tu proyecto base.
+3. Respeta tu bot oficial (@TronoModeradorBot): Te posiciona como el creador 
+   original y previene la aparición de competidores parasitarios que cierren el 
+   código.
+
+*NOTA*: Si por el contrario tu visión filosófica es dar total libertad a cualquiera 
+incluso para lucrar o crear versiones cerradas sin restricciones, la alternativa 
+apropiada sería la licencia MIT.
+
+--------------------------------------------------------------------------------
+4. TEXTO DE LA LICENCIA SUGERIDA LISTO PARA USAR (GNU AGPLv3)
+--------------------------------------------------------------------------------
+A continuación se adjunta el encabezado de aviso de copyright estándar para 
+incluir en tu repositorio bajo GNU AGPLv3:
+
+================================================================================
+                    GNU AFFERO GENERAL PUBLIC LICENSE
+                       Version 3, 19 November 2007
+
+ Copyright (C) 2026 Manuel (@TronoModeradorBot)
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+================================================================================

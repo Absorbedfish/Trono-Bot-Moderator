@@ -1,0 +1,28 @@
+FROM python:3.12-slim
+WORKDIR /app
+
+# Instalación de dependencias nativas del sistema + parches para OpenCV
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libhdf5-dev \
+    libjpeg-dev \
+    zlib1g-dev \
+    tzdata \
+    libglib2.0-0 \
+    libgl1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Configuración de la zona horaria para sincronización de logs del Trono
+ENV TZ=Europe/Moscow
+ENV PYTHONUNBUFFERED=1
+
+COPY requirements.txt .
+# 🔥 BLINDAJE ANTI-TIMEOUT: Configura a pip para soportar descargas masivas
+RUN pip install --no-cache-dir --default-timeout=1000 --retries 10 -r requirements.txt
+
+COPY . .
+
+EXPOSE 8081
+
+# 🔥 CORRECCIÓN: Sintaxis exacta de banderas, adición de --timeout y acoplamiento con wsgi.py
+CMD ["gunicorn", "--workers", "1", "--worker-class", "gthread", "--threads", "2", "--bind", "0.0.0.0:8081", "--timeout", "120", "app:app"]
