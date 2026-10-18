@@ -384,6 +384,4 @@ A continuación se presenta un resumen de la evolución técnica del proyecto. P
 
 Este proyecto está distribuido bajo la licencia **GNU Affero General Public License v3.0 (GNU AGPLv3)**.
 
-Para conocer el análisis detallado de por qué se eligió esta licencia y cómo protege el software libre en servicios de red, consulta:
-- 📖 [RECOMENDACION_LICENCIA.txt](./RECOMENDACION_LICENCIA.txt)
 - ⚖️ [LICENSE](./LICENSE)
